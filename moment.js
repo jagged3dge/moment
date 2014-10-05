@@ -908,7 +908,7 @@
             nextWeek : 'dddd [at] LT',
             lastDay : '[Yesterday] LT',
             lastWeek : 'd MMM',
-            thisYear: 'd MMM'
+            thisYear: 'd MMM',
             sameElse : 'd MMM YYYY'
         },
         calendar : function (key, mom) {
