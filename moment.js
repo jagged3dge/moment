@@ -903,12 +903,13 @@
         },
 
         _calendar : {
-            sameDay : '[Today at] LT',
-            nextDay : '[Tomorrow at] LT',
+            sameDay : '[Today] LT',
+            nextDay : '[Tomorrow] LT',
             nextWeek : 'dddd [at] LT',
-            lastDay : '[Yesterday at] LT',
-            lastWeek : '[Last] dddd [at] LT',
-            sameElse : 'L'
+            lastDay : '[Yesterday] LT',
+            lastWeek : 'd MMM',
+            thisYear: 'd MMM'
+            sameElse : 'd MMM YYYY'
         },
         calendar : function (key, mom) {
             var output = this._calendar[key];
@@ -2204,12 +2205,14 @@
             var now = time || moment(),
                 sod = makeAs(now, this).startOf('day'),
                 diff = this.diff(sod, 'days', true),
-                format = diff < -6 ? 'sameElse' :
+                format = diff < -365 ? 'sameElse' :
+                    -365 < diff < -6 ? 'thisYear' :
                     diff < -1 ? 'lastWeek' :
                     diff < 0 ? 'lastDay' :
                     diff < 1 ? 'sameDay' :
                     diff < 2 ? 'nextDay' :
-                    diff < 7 ? 'nextWeek' : 'sameElse';
+                    diff < 7 ? 'nextWeek' :
+                    diff < 365 ? 'thisYear' : 'sameElse';
             return this.format(this.localeData().calendar(format, this));
         },
 
